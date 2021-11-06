@@ -14,8 +14,9 @@ void MAIN_MENU()
 void SERIAL_UI(void)
 {
   // ~~~~~~~~~~~~~~~~~~~~~~SERIAL_UI Function ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  Serial.println("This demo expects 12 pieces of data - in floating point value"); // Prep Serial Menu
-  Serial.println("Enter data in this style <12, 12, 24.7.....>  ");
+  serial_flush_buffer(); // Flush out anything that was ented before it was suposed to be.
+  Serial.println("This demo expects data frommated like:\n <G X###.## Y###.## AoAT###.## AoAB###.##>\n OR\n <M A X###.## Y###.## AoAT###.## AoAB###.##>\n OR\n <M S X###.## Y###.## AoAT###.## AoAB###.##>"); // Prep Serial Menu
+  Serial.println("FAILURE TO FOLLOW THE FORMATTING CAN CAUSE UNEXPECTED SYSTEM MOVEMENT\n IVE DONE MY BEST TO PREVENT THIS\n");
   Serial.println();
   while (Com_selection == 1)
   {
@@ -57,6 +58,7 @@ void SERIAL_UI(void)
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Setup for a Button ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// The following is a custom menu i wrote for the serial UI LCD menu 
 void Draw_button(U8G2 u8g2, uint8_t x, uint8_t y, uint8_t width, String str, bool clicked)
 {
   if (clicked)
